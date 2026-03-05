@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app-baye
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app-baye
+  template:
+    metadata:
+      labels:
+        app: test-app-baye
+    spec:
+      containers:
+      - name: test-app-baye
+        image: image-registry.openshift-image-registry.svc:5000/testttt/test-app-baye:latest
+        ports:
+        - containerPort: 8080
