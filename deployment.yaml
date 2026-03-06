@@ -1,19 +1,31 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: test-app-baye
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: test-app-baye
-  template:
-    metadata:
-      labels:
-        app: test-app-baye
-    spec:
-      containers:
-      - name: test-app-baye
-        image: image-registry.openshift-image-registry.svc:5000/testttt/test-app-baye:latest
-        ports:
-        - containerPort: 8080
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-test2021
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-test2021
+  template:
+    metadata:
+      labels:
+        app: app-test2021
+    spec:
+      containers:
+      - name: app-test2021
+        image: ${IMAGE_NAME}
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelay: 15
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelay: 5
+          periodSeconds: 10

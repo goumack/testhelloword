@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: app-test2021
+spec:
+  host: app-test2021-test2021.apps.ocp.heritage.africa
+  port:
+    targetPort: http
+  tls:
+    insecureEdgeTerminationPolicy: Allow
+    termination: Edge
+  to:
+    kind: Service
+    name: app-test2021
